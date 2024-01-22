@@ -7,6 +7,8 @@
 - Kotlin Coroutines
 - Jetpack Compose
 - Jetpack Compose Navigation
+- Unit Testing
+- Instrumented Testing
 
 ## Screenshots
 O turn|Tie!|X wins!
