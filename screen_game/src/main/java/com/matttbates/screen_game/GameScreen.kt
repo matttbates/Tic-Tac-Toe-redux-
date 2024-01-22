@@ -18,10 +18,12 @@ import androidx.compose.material3.Text
 import com.matttbates.screen_game.store.GameState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.matttbates.tic_tac_toe.Player
+import com.matttbates.tic_tac_toe.CellState
 
 @Preview
 @Composable
@@ -29,9 +31,9 @@ fun GameScreen(
     state: GameState = GameState(
         currentPlayer = "X turn",
         board = arrayOf(
-            arrayOf(Player.X, Player.NONE, Player.O),
-            arrayOf(Player.NONE, Player.X, Player.NONE),
-            arrayOf(Player.NONE, Player.NONE, Player.X),
+            arrayOf(CellState.X, CellState.EMPTY, CellState.O),
+            arrayOf(CellState.EMPTY, CellState.X, CellState.EMPTY),
+            arrayOf(CellState.EMPTY, CellState.EMPTY, CellState.X),
         ),
         winner = null,
     ),
@@ -43,7 +45,8 @@ fun GameScreen(
         horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceAround,
     ) {
-        Text(
+        Text(modifier = Modifier
+            .semantics { contentDescription = "Message" },
             text = state.winner?:state.currentPlayer,
             style = androidx.compose.ui.text.TextStyle(
                 fontSize = 48.sp,
@@ -91,11 +94,12 @@ fun GameBoard(
                         },
                         contentAlignment = androidx.compose.ui.Alignment.Center
                     ) {
-                        Text(
+                        Text(modifier = Modifier
+                            .semantics { contentDescription = "Cell $rowIndex $colIndex" },
                             text = player.toString(),
                             style = androidx.compose.ui.text.TextStyle(
                                 fontSize = 48.sp,
-                                color = if (player == Player.O) {
+                                color = if (player == CellState.O) {
                                     androidx.compose.ui.graphics.Color.Blue
                                 } else {
                                     androidx.compose.ui.graphics.Color.Red

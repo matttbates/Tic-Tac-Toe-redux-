@@ -7,35 +7,35 @@ class Board {
         const val COLS = 3
     }
 
-    private val board: Array<Array<Player>> = Array(ROWS) { Array(COLS) { Player.NONE } }
-    private var turn = Player.X
-    private var winner = Player.NONE
+    private val board: Array<Array<CellState>> = Array(ROWS) { Array(COLS) { CellState.EMPTY } }
+    private var turn = CellState.X
+    private var winner = CellState.EMPTY
 
-    fun getTurn(): Player {
+    fun getTurn(): CellState {
         return turn
     }
 
-    fun getWinner(): Player {
+    fun getWinner(): CellState {
         return winner
     }
 
-    fun getBoard(): Array<Array<Player>> {
+    fun getBoard(): Array<Array<CellState>> {
         return board
     }
 
     fun makeMove(row: Int, col: Int): Boolean {
-        if (winner != Player.NONE) {
+        if (winner != CellState.EMPTY) {
             return false
         }
         if (row < 0 || row >= ROWS || col < 0 || col >= COLS) {
             return false
         }
-        if (board[row][col] == Player.NONE) {
+        if (board[row][col] == CellState.EMPTY) {
             board[row][col] = turn
-            turn = if (turn == Player.X) {
-                Player.O
+            turn = if (turn == CellState.X) {
+                CellState.O
             } else {
-                Player.X
+                CellState.X
             }
             return true
         }
@@ -45,24 +45,24 @@ class Board {
     fun checkWinner(): Boolean{
         // check rows
         for (row in 0 until ROWS) {
-            if (board[row][0] != Player.NONE && board[row][0] == board[row][1] && board[row][1] == board[row][2]) {
+            if (board[row][0] != CellState.EMPTY && board[row][0] == board[row][1] && board[row][1] == board[row][2]) {
                 winner = board[row][0]
                 return true
             }
         }
         // check columns
         for (col in 0 until COLS) {
-            if (board[0][col] != Player.NONE && board[0][col] == board[1][col] && board[1][col] == board[2][col]) {
+            if (board[0][col] != CellState.EMPTY && board[0][col] == board[1][col] && board[1][col] == board[2][col]) {
                 winner = board[0][col]
                 return true
             }
         }
         // check diagonals
-        if (board[0][0] != Player.NONE && board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
+        if (board[0][0] != CellState.EMPTY && board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
             winner = board[0][0]
             return true
         }
-        if (board[0][2] != Player.NONE && board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
+        if (board[0][2] != CellState.EMPTY && board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
             winner = board[0][2]
             return true
         }
@@ -70,13 +70,13 @@ class Board {
         var tie = true
         for (row in 0 until ROWS) {
             for (col in 0 until COLS) {
-                if (board[row][col] == Player.NONE) {
+                if (board[row][col] == CellState.EMPTY) {
                     tie = false
                 }
             }
         }
         if (tie) {
-            winner = Player.TIE
+            winner = CellState.TIE
             return true
         }
         return false

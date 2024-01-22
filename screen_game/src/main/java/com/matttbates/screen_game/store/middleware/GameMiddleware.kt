@@ -5,7 +5,7 @@ import com.matttbates.screen_game.store.GameAction
 import com.matttbates.redux.Middleware
 import com.matttbates.redux.Store
 import com.matttbates.tic_tac_toe.GameService
-import com.matttbates.tic_tac_toe.Player
+import com.matttbates.tic_tac_toe.CellState
 import javax.inject.Inject
 
 class GameMiddleware @Inject constructor(
@@ -31,7 +31,7 @@ class GameMiddleware @Inject constructor(
                 val currentPlayer = gameService.getTurn()
                 store.dispatch(GameAction.SetCurrentPlayer(currentPlayer))
                 val winner = gameService.getWinner()
-                if (winner != Player.NONE) {
+                if (winner != CellState.EMPTY) {
                     store.dispatch(GameAction.SetWinner(winner))
                     store.dispatch(GameAction.Buzz)
                 }

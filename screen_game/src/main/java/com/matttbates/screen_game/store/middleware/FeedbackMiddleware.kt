@@ -5,8 +5,6 @@ import com.matttbates.screen_game.store.GameState
 import com.matttbates.screen_game.store.GameAction
 import com.matttbates.redux.Middleware
 import com.matttbates.redux.Store
-import com.matttbates.tic_tac_toe.GameService
-import com.matttbates.tic_tac_toe.Player
 import javax.inject.Inject
 
 class FeedbackMiddleware @Inject constructor(

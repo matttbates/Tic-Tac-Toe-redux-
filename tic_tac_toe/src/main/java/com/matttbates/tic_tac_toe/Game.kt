@@ -11,15 +11,15 @@ class Game: GameService {
         board.checkWinner()
     }
 
-    override fun getBoard(): Array<Array<Player>> {
+    override fun getBoard(): Array<Array<CellState>> {
         return board.getBoard()
     }
 
-    override fun getTurn(): Player {
+    override fun getTurn(): CellState {
         return board.getTurn()
     }
 
-    override fun getWinner(): Player {
+    override fun getWinner(): CellState {
         return board.getWinner()
     }
 
