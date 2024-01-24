@@ -1,4 +1,7 @@
 # Tic-Tac-Toe (redux)
+## About
+This project was built to demonstrate how the following technologies can be combined in an Android application to maximize portability, reusability, scalability, and testability. This approach may be considered overkill for a simple game as Tic-Tac-Toe, but this is merely a demonstration of app architecture which does not require a complex application to understand the structure and benefits.
+
 ## Technologies showcased
 - Redux Architecture
 - Clean Architecture
