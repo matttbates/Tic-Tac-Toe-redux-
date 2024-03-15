@@ -20,15 +20,18 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import com.matttbates.screen_game.store.GameState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.matttbates.screen_game.store.GameState
 import com.matttbates.tic_tac_toe.CellState
 
 @Preview
@@ -48,7 +51,7 @@ fun GameScreen(
 ) {
     Column(modifier = Modifier
         .fillMaxSize(),
-        horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
+        horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceAround,
     ) {
         Text(modifier = Modifier
@@ -77,6 +80,24 @@ fun GameScreen(
                 contentDescription = stringResource(R.string.restart)
             )
         }
+        val context = LocalContext.current
+        Text(modifier = Modifier
+            .padding(start = 16.dp)
+            .align(Alignment.Start)
+            .clickable {
+                context.startActivity(
+                    android.content.Intent(
+                        android.content.Intent.ACTION_VIEW,
+                        android.net.Uri.parse("https://matttbates.github.io/Tic-Tac-Toe-redux-/privacy_policy.html")
+                    )
+                )
+            },
+            text = "Privacy Policy",
+            style = androidx.compose.ui.text.TextStyle(
+                fontSize = 24.sp,
+                color = Color.Blue
+            )
+        )
     }
 }
 
@@ -89,13 +110,13 @@ fun GameBoard(
 ) {
     Column(modifier = modifier
         .fillMaxSize(),
-        horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
+        horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceAround,
     ) {
         state.board.forEachIndexed { rowIndex, row ->
             Row(modifier = Modifier
                 .weight(1f),
-                verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 row.forEachIndexed { colIndex, player ->
                     Box(modifier = Modifier
@@ -104,7 +125,7 @@ fun GameBoard(
                         .clickable {
                             makeMove(rowIndex, colIndex)
                         },
-                        contentAlignment = androidx.compose.ui.Alignment.Center
+                        contentAlignment = Alignment.Center
                     ) {
                         Text(modifier = Modifier
                             .semantics { contentDescription = "Cell $rowIndex $colIndex" },
@@ -112,9 +133,9 @@ fun GameBoard(
                             style = androidx.compose.ui.text.TextStyle(
                                 fontSize = 48.sp,
                                 color = if (player == CellState.O) {
-                                    androidx.compose.ui.graphics.Color.Blue
+                                    Color.Blue
                                 } else {
-                                    androidx.compose.ui.graphics.Color.Red
+                                    Color.Red
                                 }
                             )
                         )
@@ -128,7 +149,7 @@ fun GameBoard(
                 }
             }
             if (rowIndex < state.board.size - 1) {
-                androidx.compose.material3.Divider(
+                androidx.compose.material3.HorizontalDivider(
                     thickness = 2.dp,
                 )
             }
