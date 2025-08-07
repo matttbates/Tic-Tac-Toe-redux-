@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.matttbates.logging_middleware"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 24
@@ -23,13 +23,10 @@ android {
             )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
+}
+
+kotlin{
+    jvmToolchain(17)
 }
 
 dependencies {

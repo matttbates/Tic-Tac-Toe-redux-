@@ -3,16 +3,17 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     kotlin("kapt")
     alias(libs.plugins.dagger.hilt.android.gradle.plugin)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
     namespace = "com.matttbates.tictactoeredux"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.matttbates.tictactoeredux"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 2
         versionName = "1.0"
 
@@ -30,13 +31,6 @@ android {
                 "proguard-rules.pro"
             )
         }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
     }
     buildFeatures {
         compose = true
@@ -75,4 +69,8 @@ dependencies {
     implementation (libs.dagger.hilt.navigation.compose)
 
     implementation(project(":screen_game"))
+}
+
+kotlin{
+    jvmToolchain(17)
 }
